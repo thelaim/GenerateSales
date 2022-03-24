@@ -1,7 +1,8 @@
 from django.urls import path, include
-from .views import Hello, index
+from .product.views import ProductView
 
 urlpatterns = [
-    path('', Hello.as_view()),
-    path('index', index, name='index'),
+    path('product/', ProductView.as_view()),
+    path('auth/', include('main.auth.urls')),
+    path('order/', include('main.order.urls')),
 ]
