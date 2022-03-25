@@ -3,16 +3,21 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser
 
-class BankManager(models.Manager):
-    def create_bank(self, name_bank):
-        book = self.create(name=name_bank, token=abs(hash(name_bank)))
-        return book
+#----------MANAGER---------------
+
+class ProductManager(models.Manager):
+
+    def find_product(self, name_bank):
+        return super().get_queryset().filter(bank__name=name_bank)
+
+
+
+#--------------MODELS-------------
+
 
 class Bank(models.Model):
     name = models.CharField('Название', max_length=100)
     token = models.IntegerField('Токен', unique=True, editable=False)
-
-    objects = BankManager()
 
     def __str__(self) -> str:
         return self.name
@@ -37,8 +42,15 @@ class Product(models.Model):
     percent_user = models.IntegerField('Процент партнеру банка', default=1)
     percent_bank = models.IntegerField('Процент по продукту для банка', default=5)
 
+    objects = models.Manager()
+    product_objects = ProductManager()
+
+    class Meta:
+        default_manager_name = 'product_objects'
+
     def __str__(self) -> str:
         return self.name
+
 
 class Order(models.Model):
     income = models.DecimalField(decimal_places=2, max_digits=10, default=13000)
@@ -52,5 +64,5 @@ class Order(models.Model):
     approval = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return self.user_id
+        return self.email_client
     

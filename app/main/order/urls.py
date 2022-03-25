@@ -1,7 +1,10 @@
-from django.urls import path, include
-from .views import Hello, referal
+from django.urls import path
+from .views import CreateOrderView, update_order #UpdateOrderView, update_order
 
 urlpatterns = [
-    path('ref/<int:productid>/', referal, name='referal'),
-    path('<str:username>/<int:productid>/', Hello.as_view()),
+    path('ref/<str:username>/<int:productid>/', CreateOrderView.as_view()),
+    #path('<int:pk>/<str:token>/', UpdateOrderView.as_view()),
+    path('<int:pk>/<str:token>/', update_order),
 ]
+
+#productid

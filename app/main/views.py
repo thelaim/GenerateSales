@@ -9,12 +9,11 @@ from .models import Bank
 #from .serializer import CreateBankSerializer, BankSerializer
 
 def index(request):
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
 
-    def get(self, request, *args):
-        query = Bank.objects.first()
-        content = {'message': 'Hello, World!', 'orm': query}
-        return Response(content)
+    query = Bank.objects.first()
+    content = {'message': 'Hello, World!', 'orm': query.token}
+    return HttpResponse(query.token)
 
     #query = Bank.objects.first()
     #return HttpResponse(f'{query.name}: {query.token}')
