@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'main',
+    'drf_yasg',
 ]
 
 REST_FRAMEWORK = {
@@ -67,7 +68,7 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
