@@ -20,29 +20,6 @@ class CreateOrderView(CreateAPIView):
         product = Product.objects.get(id=self.kwargs.get('productid'))
         serializer.save(user_id=user, product_id=product)
 
-'''class UpdateOrderView(APIView):
-
-    def put(self, request, productid, token, format=None):
-        order = Order.objects.get(product_id=productid)
-        if token == order.user_id.bank.token:
-            serializer = OrderUpdateBankSerializer(order, data=request.data, partial=True) 
-            if serializer.is_valid():
-                serializer.save(view=True)
-                return JsonResponse(code=201, data=serializer.data)
-            return JsonResponse(code=400, data="wrong parameters")
-
-
-class UpdateOrderView(GenericAPIView,UpdateModelMixin):
-    queryset = Order.objects.all()
-    serializer_class = OrderUpdateBankSerializer
-
-    def put(self, request, *args, **kwargs):
-        token = self.kwargs.get('token')
-        pk = self.kwargs.get('pk')
-        order = Order.objects.get(id=pk)
-        if token == order.user_id.bank.token:
-            return self.update(request, *args, **kwargs)'''
-
 @api_view(['PUT'])
 def update_order(request, pk, token):
     try: 
