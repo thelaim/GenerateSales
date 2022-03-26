@@ -34,6 +34,6 @@ class ProductSerializer(serializers.ModelSerializer):
         user =  self.context['request'].user
         data = super(ProductSerializer, self).to_representation(instance)
         return {
-            'ref' : f"http://127.0.0.1:8000/api/order/{user.username}/{id_value}",
+            'ref' : f"http://127.0.0.1:8000/api/order/ref/{user.username}/{id_value}/",
             'data' : data
         }
