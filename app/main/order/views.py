@@ -28,9 +28,7 @@ def update_order(request, pk, token):
         return JsonResponse({'message': 'not found order'}, status=status.HTTP_404_NOT_FOUND) 
  
     if request.method == 'PUT': 
-        print(order.user_id.bank.token, token)
         if int(token) == order.user_id.bank.token:
-            print('success')
             data = JSONParser().parse(request) 
             serializer = OrderUpdateBankSerializer(order, data=data) 
             if serializer.is_valid(): 
