@@ -1,0 +1,161 @@
+1. POST auth/register/ 
+API для регистрации партнеров банка
+
+Параметры запроса:
+    {
+        "username": "string",
+        "password": "string",
+        "first_name": "string",
+        "last_name": "string",
+        "bank": 0
+    }
+Ответ:
+    {
+        "id": 0,
+        "username": "string",
+        "password": "string",
+        "first_name": "string",
+        "last_name": "string",
+        "bank": 0
+    }
+
+2. POST /order/ref/{username}/{productid}/
+username - имя партнера
+productid - id продукта
+
+API для создания заявки на банковский продукт
+Параметры запроса:
+    {
+        "income": "string",
+        "email_client": "user@example.com",
+        "phone": "string",
+        "user_id": {
+            "username": "string"
+        },
+        "product_id": {
+            "name": "string"
+        }
+    }
+user_id и product_id не отдабтся в запросе
+Ответ:
+    {
+        "id": 0,
+        "income": "string",
+        "email_client": "user@example.com",
+        "phone": "string",
+        "user_id": {
+            "username": "string"
+        },
+        "product_id": {
+            "name": "string"
+        }
+    }
+
+3. PUT /order/{id}/{token}/
+id - номер заявки
+token - хэш банка
+API точка для банков, где обновляются результаты заявок
+
+Параметры запроса:
+    {
+        "view": bool,
+        "approval": bool
+    }
+Ответ:
+    {
+        "id": 0,
+        "view": bool,
+        "approval": bool
+    }
+
+4. GET /product/
+API получения продуктов, которые доступны партнеру
+Нужен jwt токен для авторизации: Bearer Token
+
+Ответ:
+{
+    'ref' : f"http://127.0.0.1:8000/api/order/ref/{user.username}/{id_value}/",
+    'data' : {
+        "name": "string",
+        "percent_user": 0,
+        "percent_bank": 0,
+        "category": {
+            "name": "string"
+        }
+        "bank": {
+            "name": "string"
+        }
+    }
+}
+
+5. GET /profile/
+Вывод данных пользователя и его успешно закрытых продаж
+Нужен jwt токен для авторизации: Bearer Token
+
+Ответ:
+{
+    "User": [
+        {
+            "username": "",
+            "email": "",
+            "bank": {
+                "name": ""
+            },
+            "first_name": "",
+            "last_name": ""
+        }
+    ],
+    "Success order": [
+        {
+            "id": 1,
+            "product_id": {
+                "name": ""
+            },
+            "income": "20.00",
+            "email_client": "",
+            "phone": "",
+            "token_bank": null,
+            "view": false,
+            "approval": true,
+            "user_id": 2
+        },
+        {
+            "id": 3,
+            "product_id": {
+                "name": ""
+            },
+            "income": "10.00",
+            "email_client": "",
+            "phone": "",
+            "token_bank": null,
+            "view": false,
+            "approval": true,
+            "user_id": 2
+        }
+    ]
+}
+
+6. PUT /profile/update/
+Для обновления данных пользователя
+Нужен jwt токен для авторизации: Bearer Token
+
+Параметры запроса:
+    {
+        "username": "" # или любое другое поле
+    }
+Ответ:
+    {
+        "User": [
+        {
+            "username": "",
+            "email": "",
+            "bank": {
+                "name": ""
+            },
+            "first_name": "",
+            "last_name": ""
+        }
+    ]
+    }
+
+
