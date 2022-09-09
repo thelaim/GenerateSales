@@ -58,7 +58,7 @@ class Order(models.Model):
     phone = models.CharField('Телефон', max_length=11) #дописать валидаторы
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
-    # написать проверку на соотвествие продукта банку партнера, хотя мало смысла :/
+    
     token_bank = models.IntegerField(blank=True, null=True)
     view = models.BooleanField(default=False)
     approval = models.BooleanField(default=False)
